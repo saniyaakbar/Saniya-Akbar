@@ -1,65 +1,90 @@
-import Image from "next/image";
+// Next.js page component (page.tsx) styled with Tailwind CSS
+// Drop this file into app/(root)/page.tsx or pages/index.tsx depending on your Next setup.
+// Requirements & notes (read first):
+// 1) Tailwind CSS must be configured in your Next app. If you don't use Tailwind, the structure and comments
+//    below will still help but you'll need to port classes to your CSS.
+// 2) Add the Google font 'Playfair Display' (for the big serif heading) and a legible sans for body (see example).
+// 3) Place your hero photo at: public/images/hero.jpg (or update the src to your asset path).
+// 4) Place your resume PDF in: public/Saniya_Akbar.pdf so the "Download Resume" button links correctly.
+// 5) This component uses the details from your resume (name, title, short summary). Edit the content below if needed.
 
-export default function Home() {
+import Image from 'next/image'
+import Link from 'next/link'
+import MyJourney from './components/MyJourney'
+import Skills from './components/Skills'
+
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+    <main className="min-h-screen bg-[#0f0f0f] text-gray-100 font-sans">
+      {/* Page container */}
+      <div className="max-w-6xl mx-auto px-6 py-16">
+
+
+        {/* Hero */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          {/* Left: Text */}
+          <div>
+            {/* <p className="text-lg text-gray-300 mb-2"></p> */}
+             <h1 className="font-serif text-6xl md:text-5xl leading-tight tracking-tight mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
+              Hello, I am
+            </h1>
+            <h1 className="font-serif text-6xl md:text-7xl leading-tight tracking-tight mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
+              Saniya Akbar
+            </h1>
+
+            <p className="text-sm max-w-xl text-gray-300 mb-6 whitespace-pre-line">
+              Technical, product-oriented Software Developer with 3+ years of experience building user-facing features, improving UX performance, and collaborating across Product, Design, and Engineering teams. Transitioning into Product Management with strong user empathy and technical depth.
+            </p>
+
+            <div className="flex gap-4 items-center">
+              <a href="#portfolio" className="px-6 py-3 bg-white/10 border border-white/10 rounded-md hover:bg-white/20">
+                View Portfolio
+              </a>
+              <a href="#contact" className="px-6 py-3 border border-white/10 rounded-md hover:bg-white/5">
+                Contact
+              </a>
+            </div>
+
+            {/* Decorative arrow and micro copy */}
+            <div className="mt-8 text-gray-400 text-sm flex items-center gap-3">
+              <svg width="48" height="24" viewBox="0 0 48 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 12H42" stroke="#a3a3a3" strokeWidth="1.2" strokeLinecap="round" />
+                <path d="M36 6L42 12L36 18" stroke="#a3a3a3" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <span>Technical PM-in-progress — bridging UX, business goals, and engineering execution.</span>
+            </div>
+          </div>
+
+          {/* Right: Photo */}
+          <div className="flex justify-end">
+            <div className="w-[320px] md:w-[420px] rounded-xl overflow-hidden shadow-xl ring-1 ring-white/5">
+              {/* Replace with your image at public/images/hero.jpg */}
+              <Image
+                src="/Saniya-hero.jpg"
+                alt="Saniya Akbar"
+                width={840}
+                height={1050}
+                className="object-cover w-full h-full"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* Optional: quick CV / highlights bar */}
+        <section className="mt-12 bg-white/3 rounded-lg p-6 border border-white/5">
+          <h3 className="text-sm uppercase tracking-wider text-gray-300 mb-2">Quick highlights</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-200">
+            <div>• 3+ years building user-facing features</div>
+            <div>• Improved performance by ~35%</div>
+            <div>• Experienced with React, Next.js, Angular</div>
+          </div>
+        </section>
+
+      </div>
+
+      <MyJourney/>
+      <Skills/>
+    </main>
+  )
 }
+

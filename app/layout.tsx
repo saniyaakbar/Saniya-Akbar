@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Navbar from "./components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +28,18 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className="container">
+          <header className="header">
+            <Navbar />
+          </header>
+
+          <main>{children}</main>
+
+          <footer className="footer">
+            <div>© {new Date().getFullYear()} Saniya Akbar</div>
+            <div>Contact: <a href="mailto:saniyaakbarofficial@gmail.com">saniyaakbarofficial@gmail.com</a></div>
+          </footer>
+        </div>
       </body>
     </html>
   );
