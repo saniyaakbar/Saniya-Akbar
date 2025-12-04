@@ -30,5 +30,5 @@ body {
 .header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:18px;}
 .card{background:white; border-radius:12px; padding:18px; box-shadow:0 8px 24px rgba(15,23,42,0.04);}
 .project-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin-top:12px;}
-.footer{margin-top:40px; color:var(--muted); font-size:13px; display:flex; justify-content:space-between; align-items:center; padding-top:18px; border-top:1px solid #e6edf3;}
+/* .footer{margin-top:40px; color:var(--muted); font-size:13px; display:flex; justify-content:space-between; align-items:center; padding-top:18px; border-top:1px solid #e6edf3;} */
 

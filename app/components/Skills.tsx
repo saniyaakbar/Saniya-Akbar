@@ -41,9 +41,8 @@ export default function SkillsIndex() {
     return () => clearTimeout(t);
   }, []);
 
-  const cardBase =
-    "relative w-full max-w-[540px] mx-auto bg-white/4 border border-white/8 rounded-2xl p-8 md:p-10 flex flex-col items-center text-center transition transform hover:scale-[1.02] hover:shadow-2xl";
-
+const cardBase =
+  "relative w-full max-w-[540px] mx-auto bg-white/4 border border-white/8 rounded-2xl p-8 md:p-10 flex flex-col items-center text-center transition-all duration-500 transform hover:scale-[1.02] hover:shadow-[0_0_35px_rgba(16,185,129,0.35)] shadow-[0_0_18px_rgba(16,185,129,0.15)]";
   return (
     <main className="min-h-screen bg-black text-white px-6 py-20">
       <div className="max-w-7xl mx-auto">
@@ -154,13 +153,6 @@ export default function SkillsIndex() {
           </Link>
         </section>
 
-        {/* extra subtext / CTA */}
-        <section className="mt-12 max-w-3xl">
-          <p className="text-gray-400">
-            Each skill group page contains detailed breakdowns, example projects and suggested case studies you can use in interviews or your portfolio.
-            If you'd like, I can also generate downloadable one-page skill summaries or printable skill badges.
-          </p>
-        </section>
       </div>
     </main>
   );

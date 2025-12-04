@@ -15,7 +15,7 @@ import Skills from './components/Skills'
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-[#0f0f0f] text-gray-100 font-sans">
+    <main className="min-h-screen bg-black text-gray-100 font-sans">
       {/* Page container */}
       <div className="max-w-6xl mx-auto px-6 py-16">
 
@@ -81,9 +81,9 @@ export default function HomePage() {
         </section>
 
       </div>
+      <Skills/>
 
       <MyJourney/>
-      <Skills/>
     </main>
   )
 }

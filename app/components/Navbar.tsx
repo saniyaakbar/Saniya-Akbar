@@ -1,92 +1,104 @@
-// components/ui/navbar.tsx
 'use client'
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import { Menu, X } from 'lucide-react' // optional, replace with simple SVGs if lucide not installed
+import { Menu, X } from 'lucide-react'
 
 export default function Navbar() {
   const pathname = usePathname() || '/'
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false) // <-- fixed: include `open`
 
   const links = [
-    { href: '/prd', label: 'PRD' },
-    { href: '/case-study-1', label: 'Case Study' },
-    { href: '/case-study-2', label: 'File Upload' },
-    { href: '/experiment', label: 'Experiment' },
+    { href: '/', label: 'Home' },
+    { href: '/skills', label: 'Skills' },
     { href: '/contact', label: 'Contact' },
-    { href: '/Saniya_Akbar.pdf', label: 'Download Resume' },
+    { href: '/resume', label: 'Resume' },
   ]
 
-  return (
-    <header className="w-full px-3.5 bg-[#0f0f0f] text-gray-100 font-sans">
-      <div className="container flex items-center justify-between py-4">
-        {/* Left: name */}
-        <div className="flex flex-col">
-          <Link href="/" className="text-lg font-semibold tracking-tight hover:text-slate-900">
-            Saniya Akbar
-          </Link>
-          <span className="text-xs text-slate-500">Product-Focused Software Developer</span>
-        </div>
-        
-        {/* Desktop links */}
-        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-          {links.map((l) => {
-            const active = pathname === l.href
-            return (
-              <Link
-                key={l.href}
-                href={l.href}
-                className={
-                  `relative transition-colors ${active ? 'text-sky-600' : 'text-slate-600 hover:text-sky-600'}` +
-                  ' px-1'
-                }
-                aria-current={active ? 'page' : undefined}
-              >
-                {l.label}
-                {/* subtle underline on active */}
-                {active ? (
-                  <span className="absolute left-0 -bottom-2 w-full h-[2px] bg-sky-600 rounded" />
-                ) : null}
-              </Link>
-            )
-          })}
-        </nav>
+  const isActive = (href: string) => {
+    if (href.startsWith('/#')) {
+      return pathname === '/'
+    }
+    return pathname === href
+  }
 
-        {/* Mobile menu toggle */}
-        <button
-          onClick={() => setOpen((s) => !s)}
-          aria-expanded={open}
-          aria-label="Toggle menu"
-          className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-slate-700 hover:bg-slate-100"
-        >
-          {open ? <X size={18} /> : <Menu size={18} />}
-        </button>
+  return (
+    <header className="w-full bg-[#050505] text-white/90 z-40">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          {/* left: brand */}
+          <div className="flex items-start gap-3">
+            <Link href="/" className="flex flex-col">
+              <span className="text-lg font-semibold text-emerald-300 hover:text-emerald-200">
+                Saniya Akbar
+              </span>
+              <span className="text-xs text-gray-400">Product-focused Software Developer</span>
+            </Link>
+          </div>
+
+          {/* center: nav for desktop */}
+          <nav className="hidden md:flex items-center gap-8">
+            {links.map((l) => {
+              const active = isActive(l.href)
+              return (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className={`relative text-sm font-medium px-1 py-1 transition-colors ${
+                    active ? 'text-emerald-300' : 'text-gray-300 hover:text-emerald-300'
+                  }`}
+                  aria-current={active ? 'page' : undefined}
+                >
+                  {l.label}
+                  {active && (
+                    <span className="absolute left-0 -bottom-2 w-full h-[2px] bg-emerald-300 rounded" />
+                  )}
+                </Link>
+              )
+            })}
+          </nav>
+
+          {/* right: mobile toggle */}
+          {/* NOTE: md:hidden -> visible on small screens, hidden on md+ */}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setOpen((s) => !s)}
+              aria-expanded={open}
+              aria-label="Toggle menu"
+              className="ml-2 inline-flex items-center justify-center rounded-md p-2 text-gray-300 hover:bg-white/3 focus:outline-none focus:ring-2 focus:ring-emerald-400"
+            >
+              {open ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/* Mobile menu */}
-      <div className={`md:hidden bg-white border-t border-slate-100 shadow-sm ${open ? 'block' : 'hidden'}`}>
-        <div className="px-4 py-3 space-y-1">
+      {/* mobile menu */}
+      <div className={`md:hidden ${open ? 'block' : 'hidden'} bg-black/80 border-t border-white/6`}>
+        <div className="px-4 pt-3 pb-4 space-y-1">
           {links.map((l) => {
-            const active = pathname === l.href
+            const active = isActive(l.href)
             return (
               <Link
                 key={l.href}
                 href={l.href}
                 onClick={() => setOpen(false)}
-                className={`block rounded-md px-3 py-2 text-sm font-medium ${active ? 'text-sky-600' : 'text-slate-700 hover:bg-slate-50'}`}
+                className={`block rounded-md px-3 py-2 text-base font-medium transition ${
+                  active ? 'text-emerald-300' : 'text-gray-300 hover:bg-white/4 hover:text-emerald-300'
+                }`}
                 aria-current={active ? 'page' : undefined}
               >
                 {l.label}
               </Link>
             )
           })}
-          <div className="pt-2 border-t border-slate-100">
+
+          <div className="mt-2 pt-2 border-t border-white/6">
             <Link
               href="/contact"
               onClick={() => setOpen(false)}
-              className="block rounded-md px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+              className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/4 hover:text-emerald-300"
             >
               Contact
             </Link>
